@@ -1,0 +1,11 @@
+{
+  "files": {
+    "main.js": "/static/js/main.fe522682.js",
+    "static/media/cryptoicon.png": "/static/media/cryptoicon.66e1ac26d8956558b9c8.png",
+    "index.html": "/index.html",
+    "main.fe522682.js.map": "/static/js/main.fe522682.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.fe522682.js"
+  ]
+}
