@@ -19,7 +19,7 @@ app.use(express.json({
     req.rawBody = buf.toString();
   }
 }));
-app.use(cors({ origin: "http://51.17.202.182:3000" }));
+app.use(cors({ origin: "http://51.17.85.94:3000" }));
 
 app.use("/api/v1/crypto", cryptoRoutes);
 app.use("/api/v1/watchlist", watchlistRoutes);
