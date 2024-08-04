@@ -8,7 +8,7 @@ const initialState ={
   error: null
 };
 
-const baseURL = "http://localhost:4000"
+const baseURL = "51.17.85.94:4000"
 
 export const fetchCryptos = createAsyncThunk("crypto/fetchCryptos", async() =>{
   const response = await axios.get(`${baseURL}/api/v1/crypto/rates`);
