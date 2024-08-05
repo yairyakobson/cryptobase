@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# Deployment Instructions
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 1. Open a new terminal in the directory of your private key (pem file) and copy the following command:
+<h4>ssh -i "cryptobasekey.pem" ubuntu@ec2-51-17-2-172.il-central-1.compute.amazonaws.com
+Note: If it’s your first time doing this, a message will appear in your terminal saying:
+<h4>The authenticity of host 'ec2-51-17-2-172.il-central-1.compute.amazonaws.com (51-17-2-172)' can't be established.
+ED25519 key fingerprint is cryptobasekey.pem.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])?</h4>
 
-## Available Scripts
+<h4>Simply write yes.</h4>
 
-In the project directory, you can run:
+<h2>Now your terminal runs the AWS instance.</h2>
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 2. Run the necessary commands based on your application and chosen AMI.
+<br/>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Deployment Commands (By Order)
 
-### `npm test`
+<h3>1. sudo apt-get update: get the latest versions of the packages of your AMI.</h3>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<h3>2. sudo apt install npm: install the npm package in your instance.</h3>
 
-### `npm run build`
+<h3>3. curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash: installs nvm (node version manager)</h3>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<strong>Note: It’s possible for the node version in your local machine and the instance to be different. To check the version installed in your instance run the node -v command.</strong>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<h3>4. source ~/.bashrc: re-runs the .bashrc file, a script file executed whenever a new terminal session is started in an interactive shell (like bash).</h3>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<h3>5. nvm install <nodejs-version>: install the nodejs version you want.</h3>
 
-### `npm run eject`
+<h3>6. nvm use <nodejs-version>: use the installed version of NodeJS.</h3>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+<strong>Note: If you’re not sure the NodeJS version was installed correctly, run the node -v command.</strong>
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<h3>7. git clone https://github.com/yairyakobson/cryptobase.git : clones the git repository from github.</h3>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<h3>8. ls: displays the name of the cloned repository(ies).</h3>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<h3>9. cd cryptobase: change the directory to that of the cloned repository.</h3>
 
-## Learn More
+<h2>Note: before running the server run npm i to install all the backend libraries to the instance.</h3></h2>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<h3>10. touch .env: creates a .env file.</h3>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<h3>11. nano .env: opens the .env file in a nano terminal.</h3>
 
-### Code Splitting
+<strong>Note: copy all the content from your .env file to the terminal and after you finished, press ctrl+x (cmd+x in mac) to exit, ctrl+y (cmd+y in mac) will display a message if you want to save or not. Choose yes and press enter to return to your regular terminal.</strong>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+<h3>12. npm run server: runs the backend server.</h3>
 
-### Analyzing the Bundle Size
+# To run the client copy the connection key, run the cd cryptobase command and run the following commands:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 1. npm install -g serve: installs the serve package globally.
 
-### Making a Progressive Web App
+### 2. serve -s build: runs our built project.</h3>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+# Extra Commands:
+<h3>1. git pull origin main: Fetches the latest code from the repository based on the directory.</h3>
 
-### Advanced Configuration
+<h3>2. cat filename.ext: fetches the content of a file.</h3>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<h3>3. rm -rf cryptobase: disconnects your repository from the EC2 instance.</h3>
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Note: After running this command, you’ll have to start the process of connecting your repository all over again.
