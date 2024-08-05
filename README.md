@@ -1,7 +1,8 @@
 # Deployment Instructions
 
 ### 1. Open a new terminal in the directory of your private key (pem file) and copy the following command:
-<h4>ssh -i "cryptobasekey.pem" ubuntu@ec2-51-17-2-172.il-central-1.compute.amazonaws.com
+<h4>ssh -i "cryptobasekey.pem" ubuntu@ec2-51-17-2-172.il-central-1.compute.amazonaws.com</h4>
+<br/>
 Note: If it’s your first time doing this, a message will appear in your terminal saying:
 <h4>The authenticity of host 'ec2-51-17-2-172.il-central-1.compute.amazonaws.com (51-17-2-172)' can't be established.
 ED25519 key fingerprint is cryptobasekey.pem.
