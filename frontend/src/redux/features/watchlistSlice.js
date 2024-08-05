@@ -2,13 +2,13 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState ={
-  customCryptos: JSON.parse(localStorage.getItem("customCrypto")) || [],
+  customCryptos: [],
   cryptoDetails: {},
   status: "idle",
   error: null
 };
 
-const baseURL = "http://localhost:5001"
+const baseURL = "http://51.17.112.249:4000"
 
 export const createCustomCryptos = createAsyncThunk("watchlist/createCustomCryptos", async(newCrypto, { rejectWithValue }) =>{
   try{
@@ -23,7 +23,6 @@ export const createCustomCryptos = createAsyncThunk("watchlist/createCustomCrypt
 
 export const fetchCustomCryptos = createAsyncThunk("watchlist/fetchCustomCryptos", async() =>{
   const response = await axios.get(`${baseURL}/api/v1/watchlist`);
-  localStorage.setItem("customCryptos", JSON.stringify(response.data));
   return response.data;
 });
 
@@ -81,7 +80,6 @@ const watchlistSlice = createSlice({
     .addCase(deleteCustomCryptos.fulfilled, (state, action) =>{
       state.status = "succeeded";
       state.customCryptos = state.customCryptos.filter(crypto => crypto.id !== action.payload.id);
-      localStorage.setItem("customCryptos", JSON.stringify(state.customCryptos));
     })
     .addCase(deleteCustomCryptos.rejected, (state, action) =>{
       state.status = "failed";
