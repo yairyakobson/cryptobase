@@ -8,7 +8,7 @@ const initialState ={
   error: null
 };
 
-const baseURL = "http://51.17.112.249:4000"
+const baseURL = "http://51.17.2.172:4000"
 
 export const createCustomCryptos = createAsyncThunk("watchlist/createCustomCryptos", async(newCrypto, { rejectWithValue }) =>{
   try{
