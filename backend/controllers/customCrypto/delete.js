@@ -1,5 +1,5 @@
+import { deleteCrypto, findCrypto } from "../../dataAccess/cryptoCases.js";
 import { delete_file } from "../../utils/aws.js";
-import CustomCrypto from "../../models/CustomCrypto.js";
 import ErrorHandler from "../../utils/errorHandler.js";
 
 export const deleteCustomCrypto = async(req, res, next) =>{
@@ -12,16 +12,17 @@ export const deleteCustomCrypto = async(req, res, next) =>{
   }
   
   try{
-    const result = await CustomCrypto.findOneAndDelete({ id: numericId });
+    const result = await findCrypto({ id: numericId });
+
+    if(!result){
+      return next(new ErrorHandler("Custom crypto not found", 404));
+    }
+
     if(result?.logo?.public_id){
       await delete_file(result?.logo?.public_id);
     }
-    if(result){
-      res.json({ message: "Removed from custom cryptos list", id: result.id });
-    }
-    else{
-      return next(new ErrorHandler("Custom crypto not found", 404));
-    }
+    await deleteCrypto({ id: numericId })
+    res.json({ message: "Removed from custom cryptos list", id: result.id });
   }
   catch(error){
     console.error(error);

@@ -1,9 +1,9 @@
-import CustomCrypto from "../../models/CustomCrypto.js";
+import { readCryptos } from "../../dataAccess/cryptoCases.js";
 import ErrorHandler from "../../utils/errorHandler.js";
 
 export const getCustomCrypto = async(req, res, next) =>{
   try{
-    const customCrypto = await CustomCrypto.find({});
+    const customCrypto = await readCryptos();
     res.json(customCrypto);
   }
   catch(error){
